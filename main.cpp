@@ -1,21 +1,9 @@
 #include <iostream>
 #include "RUN.h"
+#include "Dosis.h"
 
 using namespace std;
 char digito_verificador_rut(unsigned rut);
-class dosis {
-
-  private:
-    string variante_comercial;
-  int edadMinima;
-  int edadMaxima;
-  int numeroIdentificador;
-  int utilizada;
-
-  public:
-
-};
-
 
 class Paciente {
   int fecha_nacimiento;
@@ -30,14 +18,21 @@ class Paciente {
 int main() {
 
   RUN *rut;
+  Dosis *prueba;
   rut=new RUN();
+  prueba=new Dosis("sinovac", 78,19,40,1,12435);
 
-  cout<<""<<rut->ver()<<endl;
+  cout<<prueba->ver();
+  prueba->setedadMaxima(90);
+  cout<<prueba->ver();
+
+  /*cout<<""<<rut->ver()<<endl;
   rut->setRUN("20922297-4");
    cout<<""<<rut->ver()<<endl;
   rut->setRUN("20922297-3");
   cout<<""<<rut->ver()<<endl;
   rut->~RUN();
    cout<<""<<rut->ver()<<endl;
+ */
  
 }
