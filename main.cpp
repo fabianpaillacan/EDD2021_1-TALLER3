@@ -16,6 +16,7 @@ class dosis {
 
 };
 
+
 class Paciente {
   int fecha_nacimiento;
   string RUN;
