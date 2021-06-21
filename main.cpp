@@ -2,19 +2,11 @@
 #include "RUN.h"
 #include "Dosis.h"
 #include "Fecha.h"
-
+#include "Paciente.h";
 
 using namespace std;
 char digito_verificador_rut(unsigned rut);
 
-class Paciente {
-  int fecha_nacimiento;
-  string RUN;
-  string nombre_apellido;
-
-  public:
-
-};
 
 
 int main() {
