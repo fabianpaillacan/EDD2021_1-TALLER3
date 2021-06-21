@@ -11,8 +11,20 @@ Fecha::Fecha(){
   this->mes=01;
   this->anio=1900;
 }
-  bool Fecha::validarFecha(string stringFecha){
-
+  bool Fecha::validarFecha(int mes, int anio, int dia){
+     
+       int dias_mes[] = {31, 28, 31, 30,31, 30, 31, 31, 30, 31, 30, 31};
+       if((anio%4 == 0 and anio%100 != 0) or anio%400 == 0){
+        dias_mes[1]++;
+       }
+        if(mes < 1 or mes > 12){
+        return false;
+        }
+         mes = mes-1;
+    if(dia <= 0 or dia > dias_mes[mes]){
+        return false; // es = 0 
+    }
+    return true; //es =1 
   }
   Fecha::~Fecha(){
 
@@ -39,8 +51,8 @@ Fecha::Fecha(){
   }
   
   void Fecha::setFecha(string stringFecha){
-    
-    if (validarFecha(stringFecha)==1){
+   
+  if (validarFecha(stringFecha)==1){
 
     }
 

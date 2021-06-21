@@ -10,12 +10,13 @@ class Fecha{
  void setdia(int dia);
  void setanio(int anio);
  void setmes(int mes);
- bool validarFecha(string stringFecha);
+ 
 
  public: 
   
   Fecha();
   ~Fecha();
+  bool validarFecha(int mes, int anio, int dia);
   void setFecha(string stringFecha);
   int getdia();
   int getanio();

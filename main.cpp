@@ -16,7 +16,7 @@ int main() {
   Dosis *prueba;
   Fecha *fecha;
   fecha=new Fecha();
-  rut=new RUN();
+  rut=new RUN(); 
   prueba=new Dosis("sinovac", 78,19,40,1,12435);
 
   cout<<fecha->extraer_dia("1-marzo-1969")<<endl;
@@ -31,14 +31,17 @@ int main() {
    time_t tSac = time(NULL);       // instante actual
    struct tm* tmP = localtime(&tSac);
 
-   cout << "hh:mm:ss " << tmP->tm_hour << ":" << tmP->tm_min << ":"
+   cout << "hh:mm:ss " << tmP->tm_hour-4  << ":" << tmP->tm_min << ":"
                        << tmP->tm_sec << endl;
    cout << "dd-mm-aaaa: " << tmP->tm_mday << "-" << tmP->tm_mon+1 << "-"
                           << tmP->tm_year+1900 << endl;
    cout << "Dia de semana: " << dS[tmP->tm_wday] << endl;
    cout << "Dia del año: " << tmP->tm_yday << endl;
    cout << "Horario de verano: " << (tmP->tm_isdst ? "Si" : "No") << endl;
-
+  
+  //--------------------------------
+  cout<<"--------------"<<endl;
+  cout<<fecha->validarFecha(2, 2021, 35); //aqui se valida la fecha
 
 
   /*cout<<prueba->ver();
