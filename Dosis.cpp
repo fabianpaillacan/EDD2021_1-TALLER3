@@ -1,5 +1,6 @@
 #include "Dosis.h"
 
+using namespace std;
 
 Dosis::Dosis(string variante_comercial, int edadMaxima,int edadMinima, int stock, int utilizada, int numeroIdentificador){
   
@@ -17,12 +18,12 @@ Dosis::~Dosis(){
 }
 
 string Dosis:: ver(){
-  return "variantecomercial: "+ variante_comercial
-  +"\nedadMinima: "+to_string(edadMinima)
-  +"\nedadMaxima: "+to_string(edadMaxima)
-  +"\nstock: "+to_string(stock)+
-  +"\nutilizada: "+to_string(utilizada)
-  +"\nnumeroIdentificador: "+to_string(numeroIdentificador);
+  return "\nVariante comercial: "+ variante_comercial
+  +"\nEdad Minima: "+to_string(edadMinima)
+  +"\nEdad Maxima: "+to_string(edadMaxima)
+  +"\nStock: "+to_string(stock)+
+  +"\nUtilizada (1:si / 0:No): "+to_string(utilizada)
+  +"\nNumero Identificador: "+to_string(numeroIdentificador);
 
 }
 string Dosis::getVariante_comercial(){

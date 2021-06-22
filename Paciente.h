@@ -1,6 +1,10 @@
 #include <iostream> 
 #include "Fecha.h"
 #include "RUN.h"
+#ifndef PACIENTE_H
+#define PACIENTE_H
+
+
 using namespace std;
 
 class Paciente {
@@ -29,3 +33,4 @@ class Paciente {
 
 
 };
+#endif

@@ -41,13 +41,13 @@ string Paciente::getgenero() {
 }
 
 string Paciente::ver() {
-    return "fecha_nacimiento: " + this -> getFecha_nacimiento() +
-        "\nedad: " + to_string(this -> Paciente::edad()) +
-        "\nrun: " + this -> Paciente::getrun() +
-        "\nnombre: " + this -> getnombre() +
-        "\napellido Paterno: " + this -> getapellidoPaterno() +
-        +"\napellido Materno: " + this -> getapellidoMaterno() +
-        "\ngenero: " + this -> getgenero();
+    return "\nFecha_nacimiento: " + this -> getFecha_nacimiento() +
+        "\nEdad: " + to_string(this -> Paciente::edad()) +
+        "\nRun: " + this -> Paciente::getrun() +
+        "\nNombre: " + this -> getnombre() +
+        "\nApellido Paterno: " + this -> getapellidoPaterno() +
+        +"\nApellido Materno: " + this -> getapellidoMaterno() +
+        "\nGenero: " + this -> getgenero();
 }
 
 int Paciente::edad() {

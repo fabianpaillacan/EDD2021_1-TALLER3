@@ -1,5 +1,8 @@
 #include <iostream>
 
+#ifndef FECHA_H
+#define FECHA_H
+
 using namespace std;
 class Fecha{
  private: 
@@ -19,7 +22,7 @@ class Fecha{
   
   Fecha();
   ~Fecha();
-  void setFecha(string stringFecha);
+  int setFecha(string stringFecha);
   int getdia();
   int getanio();
   int getmes();
@@ -30,3 +33,4 @@ class Fecha{
 
   
 };
+#endif

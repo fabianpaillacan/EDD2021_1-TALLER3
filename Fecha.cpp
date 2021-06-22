@@ -113,7 +113,7 @@ void Fecha::setanio(int anio) {
   this -> anio = anio;
 }
 
-void Fecha::setFecha(string stringFecha) {
+int Fecha::setFecha(string stringFecha) {
     int dia, mes, anio;
     dia=extraer_dia(stringFecha);
     mes=extraer_mes(stringFecha);
@@ -123,8 +123,9 @@ void Fecha::setFecha(string stringFecha) {
         setdia(dia);
         setmes(mes);
         setanio(anio);
+        return 1;
     }
-
+  return 0;
 }
 //14-septiembre-1969
 int Fecha::extraer_dia(string stringFecha) {

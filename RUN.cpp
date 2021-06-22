@@ -13,13 +13,14 @@ RUN::~RUN() {
 
 }
 
-void RUN::setRUN(string x) {
+int RUN::setRUN(string x) {
 
   if (validador(x) == 1) {
 
     this -> run = x;
+    return 1;
   }
-
+  return 0;
 }
 
 bool RUN::validador(string x) {

@@ -1,6 +1,8 @@
 #include <iostream>
-
 #include <string.h>
+#ifndef DOSIS_H
+#define DOSIS_H
+
 
 using namespace std;
 
@@ -37,3 +39,4 @@ class Dosis {
 
 
 };
+#endif

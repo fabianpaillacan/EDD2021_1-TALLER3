@@ -1,5 +1,9 @@
 #include <iostream>
-//#include "paciente.h"
+
+#ifndef RUN_H
+#define RUN_H
+
+
 using namespace std;
 
 class RUN {
@@ -15,9 +19,10 @@ class RUN {
   string run;
   RUN(); //constructor  
   ~RUN();
-  void setRUN(string x);
+  int setRUN(string x);
   string getRUN();
   string ver();
 
   
 };
+#endif
