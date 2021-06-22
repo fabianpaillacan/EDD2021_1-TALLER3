@@ -1,6 +1,7 @@
 #include <iostream>
+#include <bits/stdc++.h>
 #include <time.h>
-
+#include "nodoPaciente.h"
 #include "Dosis.h"
 #include  "Fecha.h"
 #include  "Paciente.h"
@@ -28,4 +29,20 @@ int main() {
   
   cout<<"---------------------"<<endl;
  
+  /*Nodo* head= NULL;
+  head=new Nodo();
+  head->paciente=paciente;
+  head->siguiente=NULL;
+  cout<<head->paciente->ver();*/
+  
+  nodoPaciente* head2=NULL;
+  agregarNodo(&head2, paciente);
+ //cout<<head2->paciente->ver();
+   
+    Paciente *paciente3;
+   paciente3=new Paciente ("ignacio","Vega","Ortega", "f", "03-enero-2005", "20922297-3");
+    agregarNodo(&head2, paciente3);
+    printList(head2);
+    cout<<"\nNodos: "+to_string(contarNodos(head2));
+
 }
