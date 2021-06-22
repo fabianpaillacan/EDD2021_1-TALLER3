@@ -24,7 +24,9 @@ class Fecha{
   int getanio();
   int getmes();
   string ver();
-
+  int getdiaActual();
+  int getanioActual();
+  int getmesActual();
 
   
 };

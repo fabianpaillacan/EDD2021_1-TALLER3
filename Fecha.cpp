@@ -14,15 +14,43 @@ Fecha::Fecha() {
   this -> mes = 01;
   this -> anio = 1900;
 }
-bool Fecha::validarFecha(int dia, int mes, int anio) {
-
-  int mesActual, anioActual, diaActual;
+int Fecha::getdiaActual(){
+ 
   time_t tSac = time(NULL); // instante actual
   struct tm * tmP = localtime( & tSac);
 
-  diaActual = tmP -> tm_mday;
-  mesActual = tmP -> tm_mon + 1;
-  anioActual = tmP -> tm_year + 1900;
+  return tmP -> tm_mday;
+  
+}
+
+int Fecha::getmesActual(){
+  
+  time_t tSac = time(NULL); // instante actual
+  struct tm * tmP = localtime( & tSac);
+
+ 
+  return tmP -> tm_mon + 1;
+ 
+}
+
+
+int Fecha::getanioActual(){
+ 
+  time_t tSac = time(NULL); // instante actual
+  struct tm * tmP = localtime( & tSac);
+
+  
+  return tmP -> tm_year + 1900;
+}
+
+
+bool Fecha::validarFecha(int dia, int mes, int anio) {
+
+  int mesActual, anioActual, diaActual;
+ 
+  diaActual = getdiaActual();
+  mesActual = getmesActual();
+  anioActual = getanioActual();
 
   int dias_mes[] = {
     31,

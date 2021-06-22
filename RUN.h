@@ -1,5 +1,5 @@
 #include <iostream>
-
+//#include "paciente.h"
 using namespace std;
 
 class RUN {

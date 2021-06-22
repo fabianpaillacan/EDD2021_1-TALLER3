@@ -1,19 +1,31 @@
 #include <iostream> 
-
+#include "Fecha.h"
+#include "RUN.h"
 using namespace std;
 
 class Paciente {
   private: 
-  int fecha_nacimiento;
-  string RUN;
-  string nombre_apellido;
+  Fecha *fecha_nacimiento;
+  RUN *run;
+  string nombre;
+  string apellidoPaterno;
+  string apellidoMaterno;
+  string genero;
 
   public:
-  Paciente();
+  Paciente(string nombre,string apellidoPaterno, string apellidoMaterno, string genero, string fecha_nacimiento, string run);
   ~Paciente();
   int edad();//calcula la edad del paciente
-  void getFecha_nacimiento();
-  string getRUN();
+  string getFecha_nacimiento();
+  //string getRUN();
   string getnombre_apellido();
+  string getrun();
+  string getnombre();
+  string getapellidoPaterno();
+  string getapellidoMaterno();
+  string getgenero();
+  string ver();
+  
+
 
 };
