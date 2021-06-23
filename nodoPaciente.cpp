@@ -38,6 +38,7 @@ void printList(nodoPaciente *node){
         node = node->siguiente;
     }
 }
+    
 }
 
 int contarNodos(nodoPaciente *node){
@@ -55,7 +56,7 @@ void buscarNodo(nodoPaciente* node){
   string run;
   head=node;
   aux=head;
-  cout<<"dijite el run que desea buscar sin guion: "<<endl;
+  cout<<"dijite el run que desea buscar: "<<endl;
   cin>>run;
   while (aux!=NULL){
   
