@@ -1,35 +1,31 @@
 #include "nodoPaciente.h"
 #include "Paciente.h"
+#include <iostream>
+#include <string.h>
+
+
+typedef char cadena[200];
 
 void agregarNodo(nodoPaciente** head_ref, Paciente* paciente){
 
-    /* 1. allocate nodoPaciente */
+   
     nodoPaciente* new_node = new nodoPaciente();
  
-    nodoPaciente *last = *head_ref; /* used in step 5*/
- 
-    /* 2. put in the data */
+    nodoPaciente *last = *head_ref;
     new_node->paciente = paciente;
- 
-    /* 3. This new nodoPaciente is going to be
-    the last nodoPaciente, so make next of
-    it as NULL*/
     new_node->siguiente = NULL;
  
-    /* 4. If the Linked List is empty,
-    then make the new nodoPaciente as head */
     if (*head_ref == NULL)
     {
         *head_ref = new_node;
         return;
     }
   
-    /* 5. Else traverse till the last nodoPaciente */
     while (last->siguiente != NULL)
-        last = last->siguiente;
- 
-    /* 6. Change the next of last nodoPaciente */
-    last->siguiente = new_node;
+      
+      last = last->siguiente;
+      last->siguiente = new_node;
+   
     return;
 }
 
@@ -37,7 +33,8 @@ void printList(nodoPaciente *node){
 {
     while (node != NULL)
     {
-        cout<<" "<<node->paciente->ver();
+        cout<<" "<<node->paciente->ver()<<endl;
+        cout<<"--------------------\n";
         node = node->siguiente;
     }
 }
@@ -52,38 +49,32 @@ int contarNodos(nodoPaciente *node){
     return cont;
 }
 
+void buscarNodo(nodoPaciente* node){
+  nodoPaciente* head;
+  nodoPaciente* aux;
+  string run;
+  head=node;
+  aux=head;
+  cout<<"dijite el run que desea buscar sin guion: "<<endl;
+  cin>>run;
+  while (aux!=NULL){
+  
+  if (aux->paciente->getrun().compare(run)==0){
+    cout<<"-------------------"<<endl;
+    cout<<"Paciente encontrado!"<<endl;
+    cout<<"Fecha de nacimiento -> "<<aux->paciente->getFecha_nacimiento()<<endl;
+    cout<<"Edad -> "<<aux->paciente->edad()<<endl;
+    cout<<"Run -> "<<aux->paciente->getrun()<<endl;
+    cout<<"Nombre -> "<<aux->paciente->getnombre()<<endl;
+    cout<<"Apellido paterno -> "<<aux->paciente->getapellidoPaterno()<<endl;
+    cout<<"Apellido Materno -> "<<aux->paciente->getapellidoMaterno()<<endl;
+    cout<<"Genero -> " <<aux->paciente->getgenero()<<endl;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*Nodo::Nodo(){
-    this->paciente=;
-}
-Nodo::~Nodo(){
-
-}
-void Nodo::agregarNodo(){
-
-}
-void Nodo::eliminarNodo(){
+   return;
+  }
+  
+  aux=aux->siguiente;
 
 }
-void Nodo::contarNodo(){
-
 }
-void Nodo::buscarNodoRut(){
-
-}*/
+ 

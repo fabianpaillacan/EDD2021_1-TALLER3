@@ -13,6 +13,7 @@ Fecha::Fecha() {
   this -> dia = 01;
   this -> mes = 01;
   this -> anio = 1900;
+  
 }
 int Fecha::getdiaActual(){
  

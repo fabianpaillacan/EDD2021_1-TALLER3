@@ -4,7 +4,7 @@
 
 using namespace std;
 
-Paciente::Paciente(string nombre, string apellidoPaterno, string apellidoMaterno, string genero, string fecha_nacimiento, string run) {
+Paciente::Paciente(string nombre, string apellidoPaterno, string apellidoMaterno, string genero) {
     // Paciente ("Maite","Vega","Ortega", "f", "07-enero-1997", "4968692-k");
     this -> fecha_nacimiento = new Fecha();
     this -> run = new RUN();
@@ -12,8 +12,8 @@ Paciente::Paciente(string nombre, string apellidoPaterno, string apellidoMaterno
     this -> apellidoPaterno = apellidoPaterno;
     this -> apellidoMaterno = apellidoMaterno;
     this -> genero = genero;
-    this -> fecha_nacimiento -> setFecha(fecha_nacimiento);
-    this -> run -> setRUN(run);
+    //this -> fecha_nacimiento -> setFecha(fecha_nacimiento);
+    //this -> run -> setRUN(run);
 }
 
 Paciente::~Paciente() {
@@ -80,4 +80,21 @@ int Paciente::edad() {
     aniosCumplidos = anioActual - anioPaciente; 
 
     return aniosCumplidos;
+}
+RUN* Paciente::getRunObj(){
+
+  return this->run;
+
+
+}
+Fecha* Paciente:: getfechaObj(){
+
+  return this->fecha_nacimiento;
+}
+int Paciente:: setRun(string rut){
+  int success= this->run -> setRUN(rut);
+  return success;
+}
+int Paciente::setfecha_nacimiento(string fecha_nacimiento){
+  return this -> fecha_nacimiento -> setFecha(fecha_nacimiento);
 }

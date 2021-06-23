@@ -1,48 +1,220 @@
 #include <iostream>
+
 #include <bits/stdc++.h>
+
 #include <time.h>
+
 #include "nodoPaciente.h"
+
+#include "nodoInoculacion.h"
+
+#include "nodoDosis.h"
+
 #include "Dosis.h"
+
 #include  "Fecha.h"
+
 #include  "Paciente.h"
+
 #include  "Inoculacion.h"
 
-
-
-
-
 using namespace std;
+void agregarDatos(string nombreFile, nodoPaciente ** listaPacientes);
 
+#define delimitador ","
 
-int main() {
-  Inoculacion *inoculacion;
+void agregarDatos(string nombreFile, nodoPaciente ** listaPacientes) {
 
-  Fecha *fecha;
-  Dosis *dosis;
-  Paciente *paciente;
-  paciente=new Paciente ("Maite","Vega","Ortega", "f", "07-enero-1997", "20922297-3");
-  fecha=new Fecha();
-  dosis=new Dosis("sinovac", 70, 18, 50, 1, 1288238);
-  inoculacion=new Inoculacion(fecha, paciente, dosis);
+    Paciente * paciente;
 
-  cout<<inoculacion->ver()<<endl;
-  
-  cout<<"---------------------"<<endl;
- 
-  /*Nodo* head= NULL;
-  head=new Nodo();
-  head->paciente=paciente;
-  head->siguiente=NULL;
-  cout<<head->paciente->ver();*/
-  
-  nodoPaciente* head2=NULL;
-  agregarNodo(&head2, paciente);
- //cout<<head2->paciente->ver();
-   
-    Paciente *paciente3;
-   paciente3=new Paciente ("ignacio","Vega","Ortega", "f", "03-enero-2005", "20922297-3");
-    agregarNodo(&head2, paciente3);
-    printList(head2);
-    cout<<"\nNodos: "+to_string(contarNodos(head2));
+    string apellidoPaterno;
+    string fecha_nacimiento;
+    string nombre;
+    string genero;
+    string apellidoMaterno;
+
+    ifstream archivo;
+    string rut;
+    string linea_paciente;
+    string token;
+    int ini, fin;
+    int j;
+
+    archivo.open(nombreFile, ios:: in );
+    if (archivo.fail()) {
+        cout << "falla al iniciar la lectura";
+        exit(1);
+    }
+    int contLineas = 0;
+    getline(archivo, rut);
+    while (archivo.good()) {
+
+        Paciente * paciente;
+
+        getline(archivo, rut, ',');
+        getline(archivo, apellidoPaterno, ',');
+        getline(archivo, apellidoMaterno, ',');
+        getline(archivo, nombre, ',');
+        getline(archivo, genero, ',');
+        getline(archivo, fecha_nacimiento, '\n');
+        contLineas++;
+        paciente = new Paciente(nombre, apellidoMaterno, apellidoPaterno, genero);
+
+        int successRun, successFecha;
+        successRun = paciente -> setRun(rut);
+        successFecha = paciente -> setfecha_nacimiento(fecha_nacimiento);
+        if (successRun != 0 && successFecha != 0) {
+            agregarNodo(listaPacientes, paciente);
+        }
+
+    }
+    cout << "se han cargado: " << contarNodos( * listaPacientes) << endl;
+    cout << "procesados: " << contLineas << endl;
 
 }
+
+void inicializarListaDosis(nodoDosis ** listaDosis) {
+
+    int numero_de_serie = 10000;
+    for (int i = 0; i <= 2; i++) //sinovac
+    {
+        Dosis * sinovac;
+        numero_de_serie = numero_de_serie + 3;
+        sinovac = new Dosis("Sinovac", 80, 18, 90, 0, numero_de_serie);
+        agregarNodoDosis(listaDosis, sinovac);
+    }
+
+    for (int i = 0; i <= 2; i++) //pzifer
+    {
+        Dosis * pzifer;
+        numero_de_serie = numero_de_serie + 7;
+        pzifer = new Dosis("Pzifer", 55, 15, 120, 0, numero_de_serie);
+        agregarNodoDosis(listaDosis, pzifer);
+    }
+    for (int i = 0; i <= 2; i++) //sinovac
+    {
+        Dosis * AstraZeneca;
+        numero_de_serie = numero_de_serie + 5;
+        AstraZeneca = new Dosis("AstraZeneca", 41, 18, 70, 0, numero_de_serie);
+        agregarNodoDosis(listaDosis, AstraZeneca);
+    }
+
+}
+int verificacionCondicionVacuna(nodoPaciente* nodoPaciente, nodoDosis * nodoDosis) {
+ string marca=nodoDosis->dosis -> getVariante_comercial();
+ 
+ string AstraZeneca="AstraZeneca";
+  string genero=nodoPaciente -> paciente -> getgenero();
+  string f="f";
+  
+
+
+    if (nodoDosis -> dosis -> getutilizada() == 1) {
+      
+        return 0;
+    }
+    if (marca.compare(AstraZeneca)==0) {
+       
+       
+        if (genero.compare(f)==0) {
+         
+            if (nodoPaciente -> paciente -> edad() > 41) {
+                return 1;
+            } else {
+                return 0;
+            }
+
+        } else {
+            if (nodoPaciente -> paciente -> edad() > 18) {
+                return 1;
+            } else {
+                return 0;
+            }
+        }
+
+    }
+
+    if (nodoPaciente -> paciente -> edad() >= nodoDosis -> dosis -> getedadMinima() && nodoPaciente -> paciente -> edad() <= nodoDosis -> dosis -> getedadMaxima()) {
+        return 1;
+    }
+    return 0;
+}
+
+void IniciarVacunacion(nodoInoculacion ** listaInoculados, nodoPaciente * listaPaciente, nodoDosis * listaDosis) {
+  
+  nodoPaciente* ptrPaciente;
+  nodoDosis* ptrDosis;
+  string rutPaciente;
+  int verificacionVacuna=0;
+
+  ptrPaciente=listaPaciente;
+  
+    while (ptrPaciente != NULL) {
+      rutPaciente=ptrPaciente->paciente->getrun();
+      cout<<ptrPaciente->paciente->ver()<<endl;
+      ptrDosis=listaDosis;
+        while (ptrDosis != NULL) {
+        
+            /*verificacionVacuna=verificacionCondicionVacuna(ptrPaciente, ptrDosis);
+
+            if (verificacionVacuna==1){
+           
+            }*/
+
+            if (verificacionCondicionVacuna(ptrPaciente, ptrDosis)==1 && buscarRut(*listaInoculados, rutPaciente)==0){
+             
+              string marca= ptrDosis->dosis->getVariante_comercial();
+              
+              Inoculacion* inoculado;
+              Fecha* fecha;
+              fecha=new Fecha();
+              inoculado=new Inoculacion(fecha, ptrPaciente->paciente, ptrDosis->dosis);
+               int usadas=contarDosisUsadas(*listaInoculados, marca);
+              if (usadas<ptrDosis->dosis->getstock()){
+              ptrDosis->dosis->setutilizada(1);
+              agregarNodoInoculacion(listaInoculados, inoculado);
+              }
+              
+              
+            }
+            ptrDosis=ptrDosis->siguiente;
+        }
+        ptrPaciente=ptrPaciente->siguiente;
+    
+    }
+
+    string AstraZeneca="AstraZeneca";
+    string Sinovac="Sinovac";
+    string P="Pfizer";
+
+  
+}
+
+int main() {
+   
+    nodoDosis * listaDosis = NULL;
+    inicializarListaDosis( & listaDosis); 
+   
+    
+    
+   // printList(listaDosis);
+    
+    nodoPaciente * listaPacientes = NULL;
+    agregarDatos("Pacientes.csv", & listaPacientes);
+    //printList(*listaPacientes);
+    nodoInoculacion * listaInoculados = NULL;
+    IniciarVacunacion( & listaInoculados, listaPacientes, listaDosis);
+    printList(listaInoculados);
+    //contarDosisUsadas(listaInoculados, "Sinovac");
+
+    cout<<"utilizadas AstraZeneca: "<<to_string(contarDosisUsadas(listaInoculados, AstraZeneca));
+
+}
+
+
+
+
+ 
+
+
+

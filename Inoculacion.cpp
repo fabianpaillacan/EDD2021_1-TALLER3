@@ -26,4 +26,5 @@ Inoculacion::~Inoculacion(){
  string Inoculacion::ver(){
    return "\nFecha Inoculacion: "+this->fechaInoculacion->ver()+"\nInformacion del paciente "+this->paciente->ver()+"\nInformacion Vacuna"+this->dosis->ver();
  }
+ 
   
