@@ -63,3 +63,5 @@ int contarDosisUsadas(nodoInoculacion* node, string marca){
     }
     return cont;
 }
+
+

@@ -74,28 +74,30 @@ void agregarDatos(string nombreFile, nodoPaciente ** listaPacientes) {
 }
 
 void inicializarListaDosis(nodoDosis ** listaDosis) {
-
+  string AstraZenecastr="AstraZeneca";
+    string Sinovacstr="Sinovac";
+    string Pfizerstr="Pfizer";
     int numero_de_serie = 10000;
-    for (int i = 0; i <= 2; i++) //sinovac
+    for (int i = 0; i <= 90; i++) //sinovac
     {
         Dosis * sinovac;
         numero_de_serie = numero_de_serie + 3;
-        sinovac = new Dosis("Sinovac", 80, 18, 90, 0, numero_de_serie);
+        sinovac = new Dosis(Sinovacstr, 80, 18, 90, 0, numero_de_serie);
         agregarNodoDosis(listaDosis, sinovac);
     }
 
-    for (int i = 0; i <= 2; i++) //pzifer
+    for (int i = 0; i <= 120; i++) //pzifer
     {
-        Dosis * pzifer;
+        Dosis * Pfizer;
         numero_de_serie = numero_de_serie + 7;
-        pzifer = new Dosis("Pzifer", 55, 15, 120, 0, numero_de_serie);
-        agregarNodoDosis(listaDosis, pzifer);
+        Pfizer = new Dosis(Pfizerstr, 55, 15, 120, 0, numero_de_serie);
+        agregarNodoDosis(listaDosis, Pfizer);
     }
-    for (int i = 0; i <= 2; i++) //sinovac
+    for (int i = 0; i <= 70; i++) //sinovac
     {
         Dosis * AstraZeneca;
         numero_de_serie = numero_de_serie + 5;
-        AstraZeneca = new Dosis("AstraZeneca", 41, 18, 70, 0, numero_de_serie);
+        AstraZeneca = new Dosis(AstraZenecastr, 41, 18, 70, 0, numero_de_serie);
         agregarNodoDosis(listaDosis, AstraZeneca);
     }
 
@@ -151,7 +153,7 @@ void IniciarVacunacion(nodoInoculacion ** listaInoculados, nodoPaciente * listaP
   
     while (ptrPaciente != NULL) {
       rutPaciente=ptrPaciente->paciente->getrun();
-      cout<<ptrPaciente->paciente->ver()<<endl;
+      //cout<<ptrPaciente->paciente->ver()<<endl;
       ptrDosis=listaDosis;
         while (ptrDosis != NULL) {
         
@@ -185,9 +187,25 @@ void IniciarVacunacion(nodoInoculacion ** listaInoculados, nodoPaciente * listaP
 
     string AstraZeneca="AstraZeneca";
     string Sinovac="Sinovac";
-    string P="Pfizer";
+    string Pfizer="Pfizer";
+    int stockAstraZeneca=obtenerStockMarca(listaDosis, AstraZeneca);
+    int stockSinovac=obtenerStockMarca(listaDosis, Sinovac);
+    int stockPfizer=obtenerStockMarca(listaDosis, Pfizer);
+    int SinovacUsadas=contarDosisUsadas(*listaInoculados, Sinovac);
+    int PfizerUsadas=contarDosisUsadas(*listaInoculados,Pfizer);
+    int AstraZenecaUsadas=contarDosisUsadas(*listaInoculados, AstraZeneca);
 
+    cout<<"cantidad de Sinovac disponibles -> "<<stockSinovac-SinovacUsadas<<endl;
+  cout<<"cantidad de Pfizer disponibles -> "<<stockPfizer-PfizerUsadas<<endl;
+  cout<<"cantidad de AstraZeneca disponibles -> "<<stockAstraZeneca-AstraZenecaUsadas<<endl;
   
+   cout<<"cantidad de Sinovac usadas -> "<<SinovacUsadas<<endl;
+  cout<<"cantidad de Pfizer usadas -> "<<PfizerUsadas<<endl;
+  cout<<"cantidad de AstraZeneca usadas -> "<<AstraZenecaUsadas<<endl;
+
+  cout<<"cantidad de Sinovac -> "<<stockSinovac<<endl;
+  cout<<"cantidad de Pfizer-> "<<stockPfizer<<endl;
+  cout<<"cantidad de AstraZeneca -> "<<stockAstraZeneca<<endl;
 }
 
 int main() {
@@ -204,10 +222,10 @@ int main() {
     //printList(*listaPacientes);
     nodoInoculacion * listaInoculados = NULL;
     IniciarVacunacion( & listaInoculados, listaPacientes, listaDosis);
-    printList(listaInoculados);
+    //printList(listaInoculados);
     //contarDosisUsadas(listaInoculados, "Sinovac");
 
-    cout<<"utilizadas AstraZeneca: "<<to_string(contarDosisUsadas(listaInoculados, AstraZeneca));
+   /* cout<<"utilizadas AstraZeneca: "<<to_string(contarDosisUsadas(listaInoculados, AstraZeneca));*/
 
 }
 

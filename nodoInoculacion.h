@@ -18,4 +18,5 @@ void printList(nodoInoculacion *node);
 int  contarNodos(nodoInoculacion *node);
 void buscarNodo(nodoInoculacion* node);
 int contarDosisUsadas(nodoInoculacion* node, string marca);
+
 #endif

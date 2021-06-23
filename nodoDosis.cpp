@@ -42,3 +42,15 @@ int contarNodos(nodoDosis *node){
     return cont;
 }
 
+int obtenerStockMarca(nodoDosis* node, string marca){
+  
+
+    while (node!=NULL){
+      string marcaNodo=node->dosis-> getVariante_comercial();
+      if(marcaNodo.compare(marca)==0){
+        return node->dosis->getstock();
+      } 
+      node=node->siguiente;
+    }
+    return 0;
+}
