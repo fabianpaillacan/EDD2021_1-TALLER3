@@ -22,7 +22,6 @@ int RUN::setRUN(string x) {
 }
 
 bool RUN::validador(string x) {
-  //returna 1 si el rut es valido, 0 si es invalido
   string verificador;
   int digitoVerificador = RUN::getDigito(x);
   int rutSinDigito = RUN::getRutSindigito(x);

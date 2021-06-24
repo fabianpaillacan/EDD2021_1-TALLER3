@@ -31,7 +31,5 @@ class Fecha{
   int getdiaActual();
   int getanioActual();
   int getmesActual();
-
-  
 };
 #endif

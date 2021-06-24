@@ -6,8 +6,6 @@
 using namespace std;
 
 Inoculacion::Inoculacion (Fecha *fechaInoculacion, Paciente *paciente, Dosis *dosis){
-  
-  //aqui hay que retornar la fecha del pc
   this->fechaInoculacion=fechaInoculacion;
   this->paciente=paciente;
   this->dosis=dosis;

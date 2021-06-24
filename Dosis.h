@@ -20,7 +20,6 @@ class Dosis {
 
   Dosis(string variante_comercial, int edadMaxima, int edadMinima, int stock, int utilizada, int numeroIdentificador); //constructor  
   ~Dosis();
-  //void setRUN(string x);
   string getVariante_comercial();
   int getedadMinima();
   int getedadMaxima();

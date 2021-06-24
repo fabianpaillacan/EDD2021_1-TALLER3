@@ -19,7 +19,7 @@ void Fecha::setFechaActual(){
 }
 int Fecha::getdiaActual(){
  
-  time_t tSac = time(NULL); // instante actual
+  time_t tSac = time(NULL); 
   struct tm * tmP = localtime( & tSac);
 
   return tmP -> tm_mday;
@@ -28,7 +28,7 @@ int Fecha::getdiaActual(){
 
 int Fecha::getmesActual(){
   
-  time_t tSac = time(NULL); // instante actual
+  time_t tSac = time(NULL); 
   struct tm * tmP = localtime( & tSac);
 
  
@@ -38,7 +38,7 @@ int Fecha::getmesActual(){
 
 int Fecha::getanioActual(){
  
-  time_t tSac = time(NULL); // instante actual
+  time_t tSac = time(NULL);
   struct tm * tmP = localtime( & tSac);
 
   
@@ -53,20 +53,7 @@ bool Fecha::validarFecha(int dia, int mes, int anio) {
   mesActual = getmesActual();
   anioActual = getanioActual();
 
-  int dias_mes[] = {
-    31,
-    28,
-    31,
-    30,
-    31,
-    30,
-    31,
-    31,
-    30,
-    31,
-    30,
-    31
-  };
+  int dias_mes[] = {31, 28,31,30,31,30,31,31, 30,31,30,31};
   if ((anio % 4 == 0 and anio % 100 != 0) or anio % 400 == 0) {
     dias_mes[1]++;
   }
@@ -128,7 +115,6 @@ int Fecha::setFecha(string stringFecha) {
     }
   return 0;
 }
-//14-septiembre-1969
 int Fecha::extraer_dia(string stringFecha) {
 
   int ini, fin, dia;

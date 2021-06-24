@@ -94,8 +94,6 @@ int buscarRutInoculacion(nodoInoculacion* node,string run){
   while (aux!=NULL){
   
   if (aux->inoculacion->getpaciente()->getrun().compare(run)==0){
-    
-    //cout<<aux->inoculacion->ver();
       
       return 1;
   }

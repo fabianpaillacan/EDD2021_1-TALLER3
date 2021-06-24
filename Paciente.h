@@ -21,7 +21,6 @@ class Paciente {
   ~Paciente();
   int edad();//calcula la edad del paciente
   string getFecha_nacimiento();
-  //string getRUN();
   string getnombre_apellido();
   string getrun();
   RUN* getRunObj();
@@ -32,7 +31,6 @@ class Paciente {
   Fecha* getfechaObj();
   int setRun(string rut);
   int setfecha_nacimiento(string fecha_nacimiento);
-
   string ver();
  
 };

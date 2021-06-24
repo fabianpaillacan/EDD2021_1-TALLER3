@@ -14,13 +14,13 @@ class Inoculacion{
 
   public:
 
-  Inoculacion (Fecha *fechaInoculacion, Paciente *paciente, Dosis *dosis);
-  
-  ~Inoculacion();
-  Fecha *getfechaInoculacion();
-  Paciente *getpaciente();
-  Dosis *getdosis();
-  string ver();
+    Inoculacion (Fecha *fechaInoculacion, Paciente *paciente, Dosis *dosis);
+    
+    ~Inoculacion();
+    Fecha *getfechaInoculacion();
+    Paciente *getpaciente();
+    Dosis *getdosis();
+    string ver();
 
 };
 #endif
