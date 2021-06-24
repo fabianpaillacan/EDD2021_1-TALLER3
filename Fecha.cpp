@@ -1,9 +1,6 @@
 #include "Fecha.h"
-
 #include <iostream>
-
 #include <string.h>
-
 #include  <cstring>
 
 typedef char cadena[200];
@@ -14,6 +11,11 @@ Fecha::Fecha() {
   this -> mes = 01;
   this -> anio = 1900;
   
+}
+void Fecha::setFechaActual(){
+  this -> dia = getdiaActual();
+  this -> mes = getmesActual();
+  this -> anio = getanioActual();
 }
 int Fecha::getdiaActual(){
  
@@ -34,7 +36,6 @@ int Fecha::getmesActual(){
  
 }
 
-
 int Fecha::getanioActual(){
  
   time_t tSac = time(NULL); // instante actual
@@ -43,7 +44,6 @@ int Fecha::getanioActual(){
   
   return tmP -> tm_year + 1900;
 }
-
 
 bool Fecha::validarFecha(int dia, int mes, int anio) {
 

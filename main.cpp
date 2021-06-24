@@ -1,29 +1,20 @@
 #include <iostream>
-
 #include <bits/stdc++.h>
-
 #include <time.h>
-
 #include "nodoPaciente.h"
-
 #include "nodoInoculacion.h"
-
 #include "nodoDosis.h"
-
 #include "Dosis.h"
-
 #include  "Fecha.h"
-
 #include  "Paciente.h"
-
 #include  "Inoculacion.h"
 
 using namespace std;
-void agregarDatos(string nombreFile, nodoPaciente ** listaPacientes);
+int agregarDatos(string nombreFile, nodoPaciente ** listaPacientes);
 
 #define delimitador ","
 
-void agregarDatos(string nombreFile, nodoPaciente ** listaPacientes) {
+int agregarDatos(string nombreFile, nodoPaciente ** listaPacientes) {
 
     Paciente * paciente;
 
@@ -66,8 +57,8 @@ void agregarDatos(string nombreFile, nodoPaciente ** listaPacientes) {
         }
 
     }
- cout << "procesados: " << contLineas << endl;
-  cout << "se han cargado: " << contarNodos(*listaPacientes) << endl;
+    return contLineas;
+
 }
 
 void inicializarListaDosis(nodoDosis ** listaDosis) {
@@ -98,6 +89,9 @@ void inicializarListaDosis(nodoDosis ** listaDosis) {
         AstraZeneca = new Dosis(AstraZenecastr, 41, 18, 70, 0, numero_de_serie);
         agregarNodoDosis(listaDosis, AstraZeneca);
     }
+    cout<<"Stock inicial Sinovac-> 90"<<endl;
+    cout<<"Stock inicial Pfizer-> 120"<<endl;
+    cout<<"Stock inicial AstraZeneca-> 70"<<endl;
 
 }
 int verificacionCondicionVacuna(nodoPaciente* nodoPaciente, nodoDosis * nodoDosis) {
@@ -146,7 +140,7 @@ void IniciarVacunacion(nodoInoculacion ** listaInoculados, nodoPaciente * listaP
   nodoDosis* ptrDosis;
   string rutPaciente;
   int verificacionVacuna=0;
-
+  int edad0_18= 0, edad19_25=0,edad45_65=0,edad25_35=0,edad65=0,edad36_44=0,total=0;
   ptrPaciente=listaPaciente;
   
     while (ptrPaciente != NULL) {
@@ -156,17 +150,40 @@ void IniciarVacunacion(nodoInoculacion ** listaInoculados, nodoPaciente * listaP
         
 
             if (verificacionCondicionVacuna(ptrPaciente, ptrDosis)==1 && buscarRut(*listaInoculados, rutPaciente)==0){
-             
+              
+              int edadPaciente= ptrPaciente->paciente->edad();
               string marca= ptrDosis->dosis->getVariante_comercial();
               
+
               Inoculacion* inoculado;
               Fecha* fecha;
               fecha=new Fecha();
+              fecha->setFechaActual();
               inoculado=new Inoculacion(fecha, ptrPaciente->paciente, ptrDosis->dosis);
                int usadas=contarDosisUsadas(*listaInoculados, marca);
               if (usadas<ptrDosis->dosis->getstock()){
               ptrDosis->dosis->setutilizada(1);
               agregarNodoInoculacion(listaInoculados, inoculado);
+              
+              if (edadPaciente<18){
+                  edad0_18++;
+              }
+              else if (edadPaciente>=19 && edadPaciente<=25){
+                  edad19_25++;
+              }
+              else if (edadPaciente>25 && edadPaciente<=35){
+                  edad25_35++;
+              }
+              else if (edadPaciente>=45 && edadPaciente<65){
+                  edad45_65++;
+              }
+              else if (edadPaciente>65){
+                  edad65++;
+              }
+              else {
+                edad36_44++;
+              }
+
               }
               
               
@@ -188,21 +205,52 @@ void IniciarVacunacion(nodoInoculacion ** listaInoculados, nodoPaciente * listaP
     int AstraZenecaUsadas=contarDosisUsadas(*listaInoculados, AstraZeneca);
 
     cout<<"Vacunas Sinovac: "<<endl;
-    cout<<"cantidad de Sinovac -> "<<stockSinovac<<endl;
-    cout<<"cantidad de Sinovac usadas -> "<<SinovacUsadas<<endl;
-     cout<<"cantidad de Sinovac disponibles -> "<<stockSinovac-SinovacUsadas<<endl;
+    cout<<"Stock -> "<<stockSinovac<<endl;
+    cout<<"Usadas -> "<<SinovacUsadas<<endl;
+    cout<<"Disponibles -> "<<stockSinovac-SinovacUsadas<<endl;
     cout<<"--------------------------------------------\n";
     
     cout<<"Vacunas Pfizer: "<<endl;
-    cout<<"cantidad de Pfizer-> "<<stockPfizer<<endl;
-    cout<<"cantidad de Pfizer usadas -> "<<PfizerUsadas<<endl;
-    cout<<"cantidad de Pfizer disponibles -> "<<stockPfizer-PfizerUsadas<<endl;
+    cout<<"Stock-> "<<stockPfizer<<endl;
+    cout<<"Usadas -> "<<PfizerUsadas<<endl;
+    cout<<"Disponibles -> "<<stockPfizer-PfizerUsadas<<endl;
     cout<<"--------------------------------------------\n";
     
     cout<<"Vacunas  AstraZeneca : "<<endl;
-    cout<<"cantidad de AstraZeneca -> "<<stockAstraZeneca<<endl;
-    cout<<"cantidad de AstraZeneca usadas -> "<<AstraZenecaUsadas<<endl;
-    cout<<"cantidad de AstraZeneca disponibles -> "<<stockAstraZeneca-AstraZenecaUsadas<<endl;
+    cout<<"Stock ->" <<stockAstraZeneca<<endl;
+    cout<<"Usadas -> "<<AstraZenecaUsadas<<endl;
+    cout<<"Disponibles -> "<<stockAstraZeneca-AstraZenecaUsadas<<endl;
+    
+    cout<<"--------------------------------------------\n";
+    cout<<"Vacunados de 0 a 18 anios -> "<<edad0_18<<endl;
+    cout<<"Vacunados de 19 a 25 anios -> "<<edad19_25<<endl;
+    cout<<"Vacunados de 25 a 35 anios -> "<<edad25_35<<endl;
+    cout<<"Vacunados de 36 a 44 anios -> "<<edad36_44<<endl;
+    cout<<"Vacunados de 45 a 65 anios -> "<<edad45_65<<endl;
+    cout<<"Vacunados 65+ anios -> "<<edad65<<endl;
+    total=edad0_18+edad19_25+edad25_35+edad36_44+edad45_65+edad65;
+    cout<<"Total vacunados-> "<<total<<endl;
+    
+}
+
+void pacientesNoVacunados(nodoPaciente * listaPacientes, nodoInoculacion* listaInoculados){
+  nodoPaciente* headPaciente;
+  nodoInoculacion* headInoculado;
+   
+   headPaciente=listaPacientes;
+   headInoculado=listaInoculados;
+
+      
+    while (headPaciente != NULL){
+          string rut=headPaciente->paciente->getrun();
+          int encontrado=buscarRutInoculacion(listaInoculados,rut);
+        if (encontrado==0){
+          cout<<headPaciente->paciente->ver();
+          cout<<"\n";
+          cout<<"-------------------------\n";
+        }
+        headPaciente=headPaciente->siguiente;    
+    }
 
 }
 
@@ -210,25 +258,30 @@ int main() {
    nodoPaciente *listaPacientes = NULL;
    nodoDosis * listaDosis = NULL;
    nodoInoculacion * listaInoculados = NULL;
+   int retornoInoculados=0;
+   int contLineas=0;
     int opc = 0;
+   
     while (opc < 8)
 
     {
     cout << "................................................................";
             cout << "\n                                                          .\n";                                 
-            cout << "|1| Informar fecha actual.                                          .\n";                             
-            cout << "|2| Cargar base de datos pacientes.CSV.                           .\n";               
-            cout << "|3| Resultado de la carga de datos                                           .\n";                              
-            cout << "|4| Crear dosis.                                         .\n";                            
-            cout << "|5| Iniciar Vacunacion.                                                .\n";                                    
-            cout << "|6| Consultar Paciente.                                      .\n";                          
-            cout << "|7| Pacientes no vacunados                                                 .\n";       
+            cout << "|1| Informar fecha actual.\n";                             
+            cout << "|2| Cargar base de datos pacientes.CSV.\n";               
+            cout << "|3| Resultado de la carga de datos.\n";                              
+            cout << "|4| Inicializar Lista Dosis.\n";      
+
+            cout << "|5| Iniciar Vacunacion.\n";                                    
+            cout << "|6| Consultar Paciente.\n";                          
+            cout << "|7| Pacientes no vacunados.\n"; 
+
             cout << "|8| Salir.                                               .\n";                                     
     cout << "................................................................\n";
         cin >> opc;
         switch (opc) {
         case 1: {
-
+            system("clear");
         int dia, mes, anio;
             Fecha* fecha;
             fecha=new Fecha();
@@ -239,56 +292,62 @@ int main() {
             cout<<dia;
             cout<<"/"<<mes;
             cout<<"/"<<anio<<endl;
-            getchar();
-            getchar();
-            system("clear");
+            
             break;
         }
         case 2: {
-           
-            agregarDatos("Pacientes.csv", & listaPacientes);
-            cout<<"Se ha cargado correctamente."<<endl;
+            
+             contLineas=agregarDatos("Pacientes.csv", & listaPacientes);
+             cout<<"Se ha cargado correctamente."<<endl;
             getchar();
             getchar();
             system("clear");
             break;
         }
         case 3:  {
-                 printList(listaPacientes);
+                 cout << "procesados: " << contLineas << endl;
+  cout << "se han cargado: " << contarNodos(listaPacientes) << endl;
+
+                // printList(listaPacientes);
                   getchar();
                   getchar();
                   system("clear");
                   break;
         }
         case 4: {
-           
+
                 inicializarListaDosis( & listaDosis); 
-                printList(listaDosis);
+                
+                //printList(listaDosis);
                 getchar();
                 getchar();
                 system("clear");
                 break;
         }
         case 5: {
-            //falta traspasar la fecha del pc al nodo
+           
           IniciarVacunacion( &listaInoculados, listaPacientes, listaDosis);
-          printList(listaInoculados);
-          getchar();
-          getchar();
-          system("clear");
+          //printList(listaInoculados);
+          //getchar();
+          //getchar();
+          //system("clear");
           break;
         }
         case 6: {
           // falta buscar si esta inoculado o no
-              buscarNodo(listaPacientes);
+          //si utilizada es = 0 
+              retornoInoculados=buscarRutInoculacionInput(listaInoculados);
               getchar();
               getchar();
               system("clear");
               break;
         }
         case 7: {
-            //pacientes no vacunados
-
+               pacientesNoVacunados(listaPacientes, listaInoculados);
+              getchar();
+              getchar();
+              system("clear");
+              break;
         }
         default: return 0;
         }

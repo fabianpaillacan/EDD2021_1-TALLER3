@@ -34,8 +34,6 @@ class Paciente {
   int setfecha_nacimiento(string fecha_nacimiento);
 
   string ver();
-  
-
-
+ 
 };
 #endif

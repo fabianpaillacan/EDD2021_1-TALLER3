@@ -1,5 +1,4 @@
 #include "Paciente.h"
-
 #include <iostream>
 
 using namespace std;
@@ -84,8 +83,6 @@ int Paciente::edad() {
 RUN* Paciente::getRunObj(){
 
   return this->run;
-
-
 }
 Fecha* Paciente:: getfechaObj(){
 

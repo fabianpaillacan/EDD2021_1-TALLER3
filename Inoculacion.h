@@ -1,11 +1,7 @@
 #include <iostream>
-
 #include "Dosis.h"
-
 #include "Fecha.h"
-
 #include "Paciente.h"
-
 #ifndef INOCULACION_H
 #define INOCULACION_H
 

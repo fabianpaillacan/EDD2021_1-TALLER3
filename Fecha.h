@@ -23,6 +23,7 @@ class Fecha{
   Fecha();
   ~Fecha();
   int setFecha(string stringFecha);
+  void setFechaActual();
   int getdia();
   int getanio();
   int getmes();

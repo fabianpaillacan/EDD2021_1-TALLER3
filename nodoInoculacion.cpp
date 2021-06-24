@@ -1,5 +1,6 @@
 #include <iostream>
 #include "nodoInoculacion.h"
+#include "Inoculacion.h"
 #include "Paciente.h"
 
 
@@ -63,5 +64,48 @@ int contarDosisUsadas(nodoInoculacion* node, string marca){
     }
     return cont;
 }
+int buscarRutInoculacionInput(nodoInoculacion* node){
+  nodoInoculacion* head;
+  nodoInoculacion* aux;
+  string run;
+  head=node;
+  aux=head;
+  cout<<"dijite el run que desea buscar: "<<endl;
+  cin>>run;
+  while (aux!=NULL){
+  
+  if (aux->inoculacion->getpaciente()->getrun().compare(run)==0){
+    
+    cout<<aux->inoculacion->ver();
+      return 1;
+  }
+  
+  aux=aux->siguiente;
+
+}
+cout<<"Paciente no encontrado";
+return 0;
+}
+int buscarRutInoculacion(nodoInoculacion* node,string run){
+  nodoInoculacion* head;
+  nodoInoculacion* aux;
+  head=node;
+  aux=head;
+  while (aux!=NULL){
+  
+  if (aux->inoculacion->getpaciente()->getrun().compare(run)==0){
+    
+    //cout<<aux->inoculacion->ver();
+      
+      return 1;
+  }
+  
+  aux=aux->siguiente;
+
+}
+return 0;
+}
+
+ 
 
 

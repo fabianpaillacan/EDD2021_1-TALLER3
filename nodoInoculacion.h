@@ -16,7 +16,8 @@ void agregarNodoInoculacion(nodoInoculacion** head_ref, Inoculacion* inoculacion
 int buscarRut(nodoInoculacion* node, string run);
 void printList(nodoInoculacion *node);
 int  contarNodos(nodoInoculacion *node);
-void buscarNodo(nodoInoculacion* node);
 int contarDosisUsadas(nodoInoculacion* node, string marca);
+int buscarRutInoculacionInput(nodoInoculacion* node);
+int buscarRutInoculacion(nodoInoculacion* node,string run);
 
 #endif

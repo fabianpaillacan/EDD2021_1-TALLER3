@@ -1,8 +1,6 @@
 #include <iostream>
-
 #ifndef RUN_H
 #define RUN_H
-
 
 using namespace std;
 
@@ -22,7 +20,6 @@ class RUN {
   int setRUN(string x);
   string getRUN();
   string ver();
-
-  
+ 
 };
 #endif
