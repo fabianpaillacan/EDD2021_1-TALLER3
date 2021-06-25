@@ -12,5 +12,4 @@ using namespace std;
 void agregarNodoDosis(nodoDosis** head_ref, Dosis* dosis);
 void printList(nodoDosis *node);
 int  contarNodos(nodoDosis *node);
-void buscarNodo(nodoDosis* node);
 int obtenerStockMarca(nodoDosis* node, string marca);

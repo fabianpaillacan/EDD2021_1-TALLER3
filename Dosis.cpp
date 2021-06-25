@@ -44,8 +44,7 @@ int Dosis::getutilizada(){
 int Dosis::getnumeroIdentificador(){
   return this->numeroIdentificador;
 }
-//----------------
-//funciones set ->
+
 void Dosis::setVariante_comercial(string variante_comercial){
   this->variante_comercial=variante_comercial;
 }

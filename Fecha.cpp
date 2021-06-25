@@ -20,7 +20,7 @@ void Fecha::setFechaActual(){
 int Fecha::getdiaActual(){
  
   time_t tSac = time(NULL); 
-  struct tm * tmP = localtime( & tSac);
+  struct tm * tmP = localtime(&tSac);
 
   return tmP -> tm_mday;
   

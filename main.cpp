@@ -253,17 +253,15 @@ int main() {
 
     {
         cout << "................................................................";
-        cout << "\n                                                          .\n";
+        cout << "\n";
         cout << "|1| Informar fecha actual.\n";
         cout << "|2| Cargar base de datos pacientes.CSV.\n";
         cout << "|3| Resultado de la carga de datos.\n";
         cout << "|4| Inicializar Lista Dosis.\n";
-
         cout << "|5| Iniciar Vacunacion.\n";
         cout << "|6| Consultar Paciente.\n";
         cout << "|7| Pacientes no vacunados.\n";
-
-        cout << "|8| Salir.                                               .\n";
+        cout << "|8| Salir.\n";
         cout << "................................................................\n";
         cin >> opc;
         switch (opc) {

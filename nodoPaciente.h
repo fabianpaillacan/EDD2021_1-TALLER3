@@ -10,4 +10,3 @@ class nodoPaciente{
 void agregarNodo(nodoPaciente** head_ref, Paciente* paciente);
 void printList(nodoPaciente *node);
 int  contarNodos(nodoPaciente *node);
-void buscarNodo(nodoPaciente* node);
